@@ -71,13 +71,11 @@ public class DebeziumContainerTest {
                 KafkaConsumer<String, String> consumer = getConsumer(kafkaContainer)) {
 
             statement.execute("create schema todo");
-            statement.execute("""
-                              create table todo.Todo (
-                                 id int8 not null,
-                                 title varchar(255),
-                                 primary key (id)
-                              )
-                              """);
+			String mysqlreq= "create table todo.Todo ("
+			+ "id int8 not null,"
+			+ "title varchar(255),"
+			+ " primary key (id)  )";
+            statement.execute(mysqlreq);
             statement.execute("alter table todo.Todo replica identity full");
             statement.execute("insert into todo.Todo values (1, 'Be Awesome')");
             statement.execute("insert into todo.Todo values (2, 'Learn Quarkus')");

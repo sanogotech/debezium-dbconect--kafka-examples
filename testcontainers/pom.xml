@@ -93,11 +93,13 @@
         <execution>
           <id>default-testCompile</id>
           <configuration>
-            <release>14</release>
-            <compilerArgs>--enable-preview</compilerArgs>
+      
+			<source>1.8</source>
+			<target>1.8</target>
           </configuration>
         </execution>
       </executions>
+	  
         </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -107,7 +109,10 @@
           <systemPropertyVariables>
             <debeziumVersion>${version.debezium}</debeziumVersion>
           </systemPropertyVariables>
-          <argLine>--enable-preview</argLine>
+          
+		   <forkCount>3</forkCount>
+    <reuseForks>true</reuseForks>
+    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
         </configuration>
       </plugin>
     </plugins>
